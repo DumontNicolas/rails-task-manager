@@ -1,11 +1,17 @@
-<h1>Tasks</h1>
+<h1>My Tasks</h1>
 
 <ul>
-  <% @tasks.each do |task| %>
+  <% @tasks.each_with_index do |task, index| %>
     <% if task.completed %>
-    <input type="checkbox" checked><li><%=task.title %></li>
+    <li> <input type="checkbox" checked> <%= link_to task.title, task_path(task)%> <%= link_to delete_path(task), method: :delete, data: { confirm: "Delete #{task.title}?" } do %> <i class="fa fa-trash"></i><%end%></li>
     <% else %>
-    <input type="checkbox"><li><%=task.title %></li>
+    <li> <input type="checkbox"> <%= link_to task.title, task_path(task)%> <%= link_to delete_path(task), method: :delete, data: { confirm: "Delete #{task.title}?" } do %> <i class="fa fa-trash"></i><%end%></li>
     <%end%>
   <% end %>
 </ul>
+
+
+
+<hr>
+
+<%= link_to 'Add a new task', '/tasks/new' %>
